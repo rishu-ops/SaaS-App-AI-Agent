@@ -24,6 +24,9 @@ import {
 } from "@/components/ui/select";
 import { subjects } from "@/constants";
 import { Textarea } from "./ui/textarea";
+import { createCompanion } from "@/lib/actions/companion.action";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 const CompanionForm = () => {
   const formSchema = z.object({
@@ -51,8 +54,15 @@ const CompanionForm = () => {
   });
 
   // 2. Define a submit handler.
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const companion = await createCompanion(values);
+
+    if (companion) {
+      redirect(`/companions/${companion.id}`);
+    } else {
+      console.error("Failed to create companion");
+      redirect("/");
+    }
   };
 
   return (
@@ -186,11 +196,11 @@ const CompanionForm = () => {
                     <SelectValue placeholder="Select the style" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="male" className="formal">
+                    <SelectItem value="formal" className="formal">
                       formal
                     </SelectItem>
 
-                    <SelectItem value="female" className="informal">
+                    <SelectItem value="informal" className="informal">
                       informal
                     </SelectItem>
                   </SelectContent>
