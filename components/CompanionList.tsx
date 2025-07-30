@@ -82,14 +82,14 @@ const CompanionList = ({
               <TableCell className="flex items-center gap-2 w-full">
                 <p className="text-2xl">
                   {duration} <span className="max-md:hidden">mins</span>
-                  <Image
-                    src={"/icons/clock.svg"}
-                    alt="minutes"
-                    width={14}
-                    height={14}
-                    className="max-md:hidden"
-                  />
                 </p>
+                <Image
+                  src={"/icons/clock.svg"}
+                  alt="minutes"
+                  width={14}
+                  height={14}
+                  className="max-md:hidden"
+                />
               </TableCell>
             </TableRow>
           ))}

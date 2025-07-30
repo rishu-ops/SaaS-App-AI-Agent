@@ -25,7 +25,6 @@ import {
 import { subjects } from "@/constants";
 import { Textarea } from "./ui/textarea";
 import { createCompanion } from "@/lib/actions/companion.action";
-import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 const CompanionForm = () => {
